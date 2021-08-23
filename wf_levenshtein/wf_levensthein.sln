@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wf_levensthein", "wf_levensthein.vcxproj", "{AD670749-27F5-40A8-B289-81D6BCF2FB78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E3DD3B9-E54F-4C95-807F-3EBCA4E32C53}"
+	ProjectSection(SolutionItems) = preProject
+		weights.txt = weights.txt
+		words.txt = words.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Out", "Out", "{F7B35182-E8CF-4533-BE81-F424DACD333E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{677DAA79-4752-4261-A811-31982C7DC58C}"
+	ProjectSection(SolutionItems) = preProject
+		Data\A = Data\A
+		Data\B = Data\B
+		Data\C = Data\C
+		Data\D = Data\D
+		Data\E = Data\E
+		Data\F = Data\F
+		Data\G = Data\G
+		Data\H = Data\H
+		Data\I = Data\I
+		Data\J = Data\J
+		Data\K = Data\K
+		Data\L = Data\L
+		Data\M = Data\M
+		Data\N = Data\N
+		Data\O = Data\O
+		Data\P = Data\P
+		Data\Q = Data\Q
+		Data\R = Data\R
+		Data\S = Data\S
+		Data\T = Data\T
+		Data\U = Data\U
+		Data\V = Data\V
+		Data\W = Data\W
+		Data\X = Data\X
+		Data\Y = Data\Y
+		Data\Z = Data\Z
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Debug|x64.ActiveCfg = Debug|x64
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Debug|x64.Build.0 = Debug|x64
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Debug|x86.Build.0 = Debug|Win32
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Release|x64.ActiveCfg = Release|x64
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Release|x64.Build.0 = Release|x64
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Release|x86.ActiveCfg = Release|Win32
+		{AD670749-27F5-40A8-B289-81D6BCF2FB78}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7B35182-E8CF-4533-BE81-F424DACD333E} = {4E3DD3B9-E54F-4C95-807F-3EBCA4E32C53}
+		{677DAA79-4752-4261-A811-31982C7DC58C} = {4E3DD3B9-E54F-4C95-807F-3EBCA4E32C53}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40AAE3FE-BB55-454C-BFAB-EEFFA19E20D4}
+	EndGlobalSection
+EndGlobal
