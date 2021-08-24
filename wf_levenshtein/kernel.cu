@@ -95,7 +95,7 @@ __global__ void levenshteinKernel(char* wordsTargets, int* wordsTargetsPos, char
             costo = calculateWeight(weights, lenSet, pitchWeights, vWordS, vWordT);
             // Calcula el minimo 
             del = m[i * ancho + j - 1] + 2; // El mas dos es el costo de borrado
-            in = m[(i - 1) * ancho + j] + 2; // El mas dos es el costo de inserción
+            in = m[(i - 1) * ancho + j] + 2; // El mas dos es el cto de inserción
             sus = m[(i - 1) * ancho + j - 1] + costo; // Costo de sustitución
             min = del < in ? del : in;
             min = min < sus ? min : sus;

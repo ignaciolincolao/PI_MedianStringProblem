@@ -20,13 +20,13 @@ using namespace std;
 
 struct record {
     int nOp; // Numero de veces * el weight correspondiente
-    int pos; // Posición donde se realizara el cambio en la semilla actual
-    int type; // El tipo de operación 0->Insertado 1->Sustitución 2->Borrado
+    int pos; // Posiciï¿½n donde se realizara el cambio en la semilla actual
+    int type; // El tipo de operaciï¿½n 0->Insertado 1->Sustituciï¿½n 2->Borrado
     int sVal; // Caracter que se insertara o reemplazara
     int currentDist; // Distancias acumuladas entre todas las cadenas
     int newDist;// Distancia acumulada con la nueva semilla
     int totalDist; // Numero de distancias revisadas desde que se ejecuto el codigo
-    int pTry; // La posición en la que se encontraba cuando encontro una semilla mejor
+    int pTry; // La posiciï¿½n en la que se encontraba cuando encontro una semilla mejor
     float currentAvgDist; // Actual distancia promedio de la semilla
     float newAvgDist;// Nueva distancia promedio de la semilla
 };
@@ -58,10 +58,10 @@ record make_record(int nOp, int pos, int type, int sVal, int currentDist, int ne
     return myrecord;
 }
 
-string letter = "A";
-string folder = "L270";
+string letter = "W";
+string folder = "L360";
 int threadPerBlock = 6;
-int sizeData = 270;
+int sizeData = 360;
 
 
 int main(int argc, char* argv[])
@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
     size_t pitchWeights;
 
 
-    // Extrae la infomación de los pesos de freeman
+    // Extrae la infomaciï¿½n de los pesos de freeman
     string line;
     ifstream myfile("weights.txt");
     int row = 0;
@@ -323,7 +323,7 @@ int createSeed(int* wordsTargetsPos, char* dev_wordsTargets, int* dev_wordsTarge
 
     char* dev_wordSource = NULL;
     int* dev_distances = NULL;
-    //cout << "este es la transformación de la palabra " << wordSource << " || " << lenWordSource << endl;
+    //cout << "este es la transformaciï¿½n de la palabra " << wordSource << " || " << lenWordSource << endl;
 
     int** dev_matrix;
 
@@ -342,7 +342,7 @@ int createSeed(int* wordsTargetsPos, char* dev_wordsTargets, int* dev_wordsTarge
 
     //cout << "valores pith" << endl;
     // Reserva la memoria para cada matriz en la gpu
-    // Si la transformación de palabra es al reves pitchMatrix deberia ser un array que contiene los puntos a los pith 
+    // Si la transformaciï¿½n de palabra es al reves pitchMatrix deberia ser un array que contiene los puntos a los pith 
     for (int x = 0; x < nWords; x++) {
         len = wordsTargetsPos[(x * 2) + 1] - wordsTargetsPos[x * 2];
         gpuErrchk(cudaMallocPitch((void**)&dev_matrix[x], &pitchMatrix[x], (len + 1) * sizeof(int), lenWordSource + 1));
@@ -354,7 +354,7 @@ int createSeed(int* wordsTargetsPos, char* dev_wordsTargets, int* dev_wordsTarge
 
 
 
-    // Asigna búferes de GPU para 1 vector de wordSource.
+    // Asigna bï¿½feres de GPU para 1 vector de wordSource.
     gpuErrchk(cudaMalloc((void**)&dev_wordSource, lenWordSource * sizeof(int)));
 
 
@@ -438,13 +438,13 @@ void levenshtein(int** actions, int* wordsTargetsPos, char* dev_wordsTargets, in
 
     //cout << "valores pith" << endl;
     // Reserva la memoria para cada matriz en la gpu
-    // Si la transformación de palabra es al reves pitchMatrix deberia ser un array que contiene los puntos a los pith 
+    // Si la transformaciï¿½n de palabra es al reves pitchMatrix deberia ser un array que contiene los puntos a los pith 
     for (int x = 0; x < nWords; x++) {
         len = wordsTargetsPos[(x * 2) + 1] - wordsTargetsPos[x * 2];
         gpuErrchk(cudaMallocPitch((void**)&dev_matrix[x], &pitchMatrix[x], (len + 1) * sizeof(int), lenWordSource + 1));
-        // Reserva memoria para las acciones en cada combinación
-        actions[x] = (int*)malloc(((len * lenWordSource) + 2) * sizeof(int));
-        gpuErrchk(cudaMalloc((void**)&dev_actions[x], ((len * lenWordSource) + 2) * sizeof(int))); // Se suma 2, uno es de la distancia y el otro es para el "-1" que indica el final
+        // Reserva memoria para las acciones en cada combinaciï¿½n
+        actions[x] = (int*)malloc((((len + lenWordSource)*3) + 2) * sizeof(int));
+        gpuErrchk(cudaMalloc((void**)&dev_actions[x], ((((len - 1) + (lenWordSource - 1)) * 3) + 2) * sizeof(int))); // Se suma 2, uno es de la distancia y el otro es para el "-1" que indica el final
     }
     //cout << endl;
 
@@ -455,7 +455,7 @@ void levenshtein(int** actions, int* wordsTargetsPos, char* dev_wordsTargets, in
 
 
 
-    // Asigna búferes de GPU para 1 vector de wordSource.
+    // Asigna bï¿½feres de GPU para 1 vector de wordSource.
     gpuErrchk(cudaMalloc((void**)&dev_wordSource, lenWordSource * sizeof(int)));
 
     // Copia el vector wordSource a la gpu
@@ -485,7 +485,7 @@ void levenshtein(int** actions, int* wordsTargetsPos, char* dev_wordsTargets, in
     for (int x = 0; x < nWords; x++) {
         len = wordsTargetsPos[(x * 2) + 1] - wordsTargetsPos[x * 2];
         (*totalDist) += 1;
-        gpuErrchk(cudaMemcpy(actions[x], dev_actions[x], ((len * lenWordSource) + 2) * sizeof(int), cudaMemcpyDeviceToHost));
+        gpuErrchk(cudaMemcpy(actions[x], dev_actions[x], ((((len - 1) + (lenWordSource - 1)) * 3) + 2) * sizeof(int), cudaMemcpyDeviceToHost));
         (*currentDistance) += actions[x][0];
         gpuErrchk(cudaFree(dev_matrix[x]));
         gpuErrchk(cudaFree(dev_actions[x]));
@@ -516,10 +516,10 @@ tuple <char*, int* > loadData(char* wordsTargets, int* wordsTargetsPos, size_t l
     int* dev_wordsTargetsPos = NULL;
 
 
-    // Asigna búferes de GPU para 1 vector de wordsTargets.
+    // Asigna bï¿½feres de GPU para 1 vector de wordsTargets.
     gpuErrchk(cudaMalloc((void**)&dev_wordsTargets, lenWordsTargets * sizeof(char)));
 
-    // Asigna búferes de GPU para 1 vector de wordsTargetsPos.
+    // Asigna bï¿½feres de GPU para 1 vector de wordsTargetsPos.
     gpuErrchk(cudaMalloc((void**)&dev_wordsTargetsPos, lenWordsTargetsPos * sizeof(int)));
 
     // Copia el vector wordsTargets a la gpu
